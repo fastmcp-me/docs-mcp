@@ -74,6 +74,7 @@ export function loadConfig() {
 	if (process.env.DATA_DIR) config.dataDir = process.env.DATA_DIR;
 	if (process.env.TOOL_NAME) config.toolName = process.env.TOOL_NAME;
 	if (process.env.TOOL_DESCRIPTION) config.toolDescription = process.env.TOOL_DESCRIPTION;
+	if (process.env.IGNORE_PATTERNS) config.ignorePatterns = process.env.IGNORE_PATTERNS.split(',').map(p => p.trim());
 
 	// Override with command line arguments
 	if (args.includeDir) config.includeDir = args.includeDir;
@@ -83,6 +84,7 @@ export function loadConfig() {
 	if (args.dataDir) config.dataDir = args.dataDir;
 	if (args.toolName) config.toolName = args.toolName;
 	if (args.toolDescription) config.toolDescription = args.toolDescription;
+	if (args.ignorePatterns) config.ignorePatterns = Array.isArray(args.ignorePatterns) ? args.ignorePatterns : args.ignorePatterns.split(',').map(p => p.trim());
 	if (args.enableBuildCleanup !== undefined) config.enableBuildCleanup = args.enableBuildCleanup === true || args.enableBuildCleanup === 'true';
 
 	// Ensure dataDir is an absolute path
